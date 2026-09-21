@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>メルカリコピー出品ツール — インストール</title>
+<style>
+  :root { --accent:#e94560; --dark:#1a1a2e; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif; margin:0; background:#f7f7fa; color:#222; line-height:1.75; }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 60px; }
+  h1 { font-size:22px; color:var(--dark); margin:8px 0 4px; }
+  .sub { color:#666; font-size:14px; margin-bottom:20px; }
+  .card { background:#fff; border-radius:14px; padding:18px 16px; margin-bottom:16px; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  h2 { font-size:17px; margin:0 0 10px; color:var(--dark); border-left:4px solid var(--accent); padding-left:10px; }
+  .step { display:flex; gap:10px; margin:12px 0; }
+  .num { flex:0 0 26px; height:26px; border-radius:50%; background:var(--accent); color:#fff; font-weight:bold; text-align:center; line-height:26px; font-size:14px; }
+  .step div p { margin:0; font-size:15px; }
+  .step small { color:#777; }
+  input.key { width:100%; font-size:18px; padding:12px; border:2px solid #ddd; border-radius:10px; text-transform:uppercase; letter-spacing:1px; text-align:center; }
+  button.copy { width:100%; background:var(--accent); color:#fff; border:0; border-radius:12px; padding:16px; font-size:17px; font-weight:bold; cursor:pointer; margin-top:10px; }
+  textarea { width:100%; height:80px; font-size:11px; font-family:monospace; border:1px solid #ddd; border-radius:8px; padding:8px; margin-top:10px; color:#555; }
+  .ok { background:#e8f8ef; border-radius:8px; padding:8px 12px; font-size:14px; color:#1a7f4b; display:none; margin-top:8px; }
+  .err { background:#fdecec; border-radius:8px; padding:8px 12px; font-size:14px; color:#9b1c1c; display:none; margin-top:8px; }
+  .warn { background:#fff6e6; border-radius:10px; padding:10px 14px; font-size:14px; margin-top:10px; }
+  .note { font-size:13px; color:#666; }
+  code { background:#eee; border-radius:4px; padding:1px 5px; font-size:13px; }
+  ul { padding-left:20px; margin:6px 0; }
+  li { margin:4px 0; font-size:14.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📱 メルカリコピー出品ツール</h1>
+  <div class="sub">過去の出品(販売履歴・出品中)を写真ごと丸ごとコピーして、スマホだけで出品フォームに自動入力。自動アップデート対応版。</div>
+
+  <div class="card">
+    <h2>STEP 1 あなた専用コードを作成</h2>
+    <p style="font-size:15px;margin:0 0 6px">購入時に届いた<b>ライセンスキー</b>を入力してください。</p>
+    <input class="key" id="keyIn" placeholder="XXXX-XXXX-XXXX" autocomplete="off">
+    <button class="copy" id="genBtn">📋 専用ブックマークレットを生成してコピー</button>
+    <div class="ok" id="okMsg">✅ コピーしました!次はSTEP 2へ</div>
+    <div class="err" id="errMsg">ライセンスキーの形式が正しくありません(例: AB2C-DE3F-GH4J)</div>
+    <textarea id="out" readonly placeholder="ここに専用コードが表示されます"></textarea>
+    <p class="note">ボタンでコピーできない場合は、上の枠内を長押し→「すべてを選択」→「コピー」。</p>
+  </div>
+
+  <div class="card">
+    <h2>STEP 2 Safariにブックマーク登録(初回のみ)</h2>
+    <div class="step"><span class="num">1</span><div><p>iPhoneのSafariで適当なページ(メルカリなど)を開き、下の<b>共有ボタン□↑</b>→<b>「ブックマークを追加」</b>。</p></div></div>
+    <div class="step"><span class="num">2</span><div><p>名前を<b>「メルカリコピー」</b>にして保存。</p></div></div>
+    <div class="step"><span class="num">3</span><div><p>下部の本のアイコン📖→右下<b>「編集」</b>→「メルカリコピー」の行をタップ。</p></div></div>
+    <div class="step"><span class="num">4</span><div><p>2行目のURL欄を<b>全部消して</b>、STEP 1のコードを<b>貼り付け</b>→「完了」。</p><small>※先頭が javascript: で始まり、末尾が })(); で終わっていればOK</small></div></div>
+  </div>
+
+  <div class="card">
+    <h2>STEP 3 使い方(毎回)</h2>
+    <div class="step"><span class="num">1</span><div><p>Safariで <code>jp.mercari.com</code> にログインし、コピーしたい<b>商品ページ</b>を開く。</p><small>マイページ→出品した商品(出品中/売却済み)から。売却済みで取引画面が開いたら商品名をタップして商品ページへ。</small></div></div>
+    <div class="step"><span class="num">2</span><div><p>ブックマークから<b>「メルカリコピー」をタップ</b>→「✅コピーしました」→<b>「出品ページを開く→」</b>。</p></div></div>
+    <div class="step"><span class="num">3</span><div><p>出品ページで<b>もう一度「メルカリコピー」をタップ</b>→写真・商品名・説明文・価格・配送設定が自動入力+照合(✓/✗)。</p></div></div>
+    <div class="step"><span class="num">4</span><div><p>残り3つ(カテゴリー/商品の状態/配送の方法)は画面に出る元商品の値を見ながらタップで選択。戻ったら再タップで再照合。</p></div></div>
+    <div class="step"><span class="num">5</span><div><p>内容を確認して自分で<b>「下書きに保存する」</b>か<b>「出品する」</b>をタップ。</p><small>ツールは保存・出品ボタンを自動では押しません。</small></div></div>
+  </div>
+
+  <div class="card">
+    <h2>うまくいかないとき</h2>
+    <ul>
+      <li><b>「取得に失敗」</b>: 商品ページを一番下まで一度スクロールしてから再タップ。</li>
+      <li><b>「ライセンスキーが無効です」</b>: STEP 1のキーの打ち間違いを確認して作り直し。</li>
+      <li><b>✗が出る</b>: Safariの「ぁあ」→「デスクトップ用Webサイトを表示」で再タップ。</li>
+      <li><b>何も起きない</b>: 電波状況を確認。ブックマークURLの先頭が <code>javascript:</code> か確認。</li>
+    </ul>
+    <div class="warn">⚠️ 本ツールは自分の出品のコピー用です。他の人の出品を複製する目的では使用しないでください。メルカリの仕様変更で一時的に動かなくなることがあります(自動アップデートで順次対応)。保存・出品の最終確認は必ずご自身で行ってください。本ツールはメルカリ公式のものではありません。</div>
+  </div>
+</div>
+<script>
+var MAIN_JS_URL = 'https://marblepadorion1616-svg.github.io/mercari-copy/main.js';
+
+document.getElementById('genBtn').onclick = function () {
+  var key = document.getElementById('keyIn').value.trim().toUpperCase();
+  var err = document.getElementById('errMsg');
+  if (!/^[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}$/.test(key)) { err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  var code = "javascript:(function(){var s=document.createElement('script');s.src='" + MAIN_JS_URL + "?k=" + key + "&t='+Date.now();(document.body||document.documentElement).appendChild(s);})();";
+  var ta = document.getElementById('out');
+  ta.value = code;
+  var done = function () { document.getElementById('okMsg').style.display = 'block'; };
+  var fallback = function () { ta.focus(); ta.select(); ta.setSelectionRange(0, code.length); try { document.execCommand('copy'); } catch (e) {} done(); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(done).catch(fallback);
+  } else { fallback(); }
+};
+</script>
+</body>
+</html>
